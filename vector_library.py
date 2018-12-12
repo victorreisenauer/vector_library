@@ -24,3 +24,21 @@ class Vector():
 
     def __eq__(self, v):
         return self.coordinates == v.coordinates
+
+    def add_vector(self, vector2):
+        """add vector2 to the vector your called the method on"""
+        new_coordinates = [x+y for x, y in zip(self.coordinates, vector2.coordinates)]
+        return Vector(new_coordinates)
+
+    def sub_vector(self, vector2):
+        """subtract vector2 from the vector your called the method on"""
+        new_coordinates = [x-y for x, y in zip(self.coordinates, vector2.coordinates)]
+        return new_coordinates
+
+
+
+# -----------testing---------------
+vector_1 = Vector([0, 0])
+vector_2 = Vector([2, 3])
+
+print(vector_1.normalize())
