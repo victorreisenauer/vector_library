@@ -1,6 +1,9 @@
 """create a library for vector operations"""
 
 from math import sqrt, acos, degrees
+from decimal import Decimal, getcontext
+
+getcontext().prec = 30
 
 class Vector():
     """create vectors - initialize instances by entering a list as coordinates (2Dimensional)"""
@@ -8,8 +11,8 @@ class Vector():
         try:
             if not coordinates:
                 raise ValueError
-            self.coordinates = tuple(coordinates)
-            self.dimension = len(coordinates)
+            self.coordinates = tuple([Decimal(x) for x in coordinates])
+            self.dimension = len(self.coordinates)
 
         except ValueError:
             raise ValueError('The coordinates must be nonempty')
@@ -37,12 +40,12 @@ class Vector():
 
     def times_scalar(self, scalar):
         """multiply the vector your called the method on with the inputted scalar"""
-        new_coordinates = [x*scalar for x in self.coordinates]
+        new_coordinates = [x*Decimal(scalar) for x in self.coordinates]
         return new_coordinates
 
     def get_magnitude(self):
         """get the magnitude of the vector"""
-        magnitude = sqrt(sum([x**2 for x in self.coordinates]))
+        magnitude = Decimal(sqrt(sum([x**2 for x in self.coordinates])))
         return magnitude
 
     def normalize(self):
@@ -76,7 +79,7 @@ class Vector():
 
 
 # -----------testing---------------
-vector_1 = Vector([1, 2, -1])
-vector_2 = Vector([1, 2, 0])
+vector_1 = Vector(['7.887', '4.138'])
+vector_2 = Vector(['-8.802', '6.776'])
 
-print(vector_2.get_angle(vector_2))
+print(vector_2.get_angle(vector_1, True))
