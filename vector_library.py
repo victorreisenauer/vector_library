@@ -1,6 +1,6 @@
 """create a library for vector operations"""
 
-from math import sqrt, acos, degrees
+from math import sqrt, acos, degrees, pi
 from decimal import Decimal, getcontext
 
 getcontext().prec = 30
@@ -27,6 +27,9 @@ class Vector():
 
     def __eq__(self, v):
         return self.coordinates == v.coordinates
+
+    def is_zero(self, tolerance=1e-10):
+        return self.get_magnitude() < tolerance
 
     def add_vector(self, vector2):
         """add vector2 to the vector your called the method on"""
@@ -78,8 +81,10 @@ class Vector():
 
 
 
-# -----------testing---------------
-vector_1 = Vector(['7.887', '4.138'])
-vector_2 = Vector(['-8.802', '6.776'])
 
-print(vector_2.get_angle(vector_1, True))
+
+# -----------testing---------------
+vector_1 = Vector(['1', '0'])
+vector_2 = Vector(['0', '5'])
+
+#print(vector_2.is_parallel_to(vector_1))
