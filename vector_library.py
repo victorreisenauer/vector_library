@@ -53,9 +53,13 @@ class Vector():
         except ZeroDivisionError:
             raise Exception("Cannot normalize vectors with zero magnitude")
 
+    def get_dot_prod(self, vector2):
+        dot_prod = [x*y for x, y in zip(self.coordinates, vector2.coordinates)]
+        dot_prod = sum(dot_prod)
+        return dot_prod
 
 # -----------testing---------------
-vector_1 = Vector([0, 0])
-vector_2 = Vector([2, 3])
+vector_1 = Vector([1, 2, -1])
+vector_2 = Vector([3, 1, 0])
 
-print(vector_1.normalize())
+print(vector_1.get_dot_prod(vector_2))
