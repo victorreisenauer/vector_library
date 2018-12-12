@@ -57,15 +57,26 @@ class Vector():
         """get the dot product(inner product) instance and vector2"""
         return sum([x*y for x, y in zip(self.coordinates, vector2.coordinates)])
 
-    def get_angle(self, vector2):
-        """get the angle in degrees between the instance and vector2"""
-        angle = acos(self.get_dot_prod(vector2) / (self.get_magnitude()*vector2.get_magnitude()))
-        return degrees(angle)
+    def get_angle(self, vector2, in_degrees=False):
+        """get the angle between the instance and vector2"""
+        try:
+            u1 = self.normalize()
+            u2 = vector2.normalize()
+            angle_in_radians = acos(u1.get_dot_prod(u2))
+
+            if in_degrees:
+                return degrees(angle_in_radians)
+            return angle_in_radians
+        except Exception as zero_error:
+            if str(zero_error) == "Cannot normalize vectors with zero magnitude":
+                raise Exception('Cannot compute an angle with the zero vector')
+            else:
+                raise zero_error
 
 
 
 # -----------testing---------------
 vector_1 = Vector([1, 2, -1])
-vector_2 = Vector([3, 1, 0])
+vector_2 = Vector([1, 2, 0])
 
-print(vector_1.get_angle(vector_2))
+print(vector_2.get_angle(vector_2))
