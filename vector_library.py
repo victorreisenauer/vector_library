@@ -40,6 +40,10 @@ class Vector():
         new_coordinates = [x*scalar for x in self.coordinates]
         return new_coordinates
 
+    def get_magnitude(self):
+        "get the magnitude of the vector"
+        magnitude = sqrt(sum([x**2 for x in self.coordinates]))
+        return magnitude
 
 
 # -----------testing---------------
