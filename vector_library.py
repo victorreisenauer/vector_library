@@ -79,7 +79,16 @@ class Vector():
             else:
                 raise zero_error
 
+    def is_orthogonal_to(self, vector2, tolerance=1e-10):
+        """check if instance is orthogonal (90 degrees) to vector2"""
+        return abs(self.get_dot_prod(vector2)) < tolerance
 
+    def is_parallel_to(self, vector2):
+        """check if instance is parallel to vector2"""
+        return (self.is_zero()
+                or vector2.is_zero()
+                or self.get_angle(vector2) == 0
+                or self.get_angle(vector2) == pi)
 
 
 
