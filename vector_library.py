@@ -41,12 +41,12 @@ class Vector():
         return new_coordinates
 
     def get_magnitude(self):
-        "get the magnitude of the vector"
+        """get the magnitude of the vector"""
         magnitude = sqrt(sum([x**2 for x in self.coordinates]))
         return magnitude
 
     def normalize(self):
-        "get the normalized vector of the vector you called the method on"
+        """get the normalized vector of the vector you called the method on"""
         try:
             normal_coord = [x/self.get_magnitude() for x in self.coordinates]
             return Vector(normal_coord)
@@ -54,11 +54,13 @@ class Vector():
             raise Exception("Cannot normalize vectors with zero magnitude")
 
     def get_dot_prod(self, vector2):
+        """get the dot product(inner product) instance and vector2"""
         dot_prod = [x*y for x, y in zip(self.coordinates, vector2.coordinates)]
         dot_prod = sum(dot_prod)
         return dot_prod
 
     def get_angle(self, vector2):
+        """get the angle in degrees between the instance and vector2"""
         angle = acos(self.get_dot_prod(vector2) / (self.get_magnitude()*vector2.get_magnitude()))
         return degrees(angle)
 
