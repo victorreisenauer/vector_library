@@ -1,6 +1,6 @@
 """create a library for vector operations"""
 
-from math import sqrt
+from math import sqrt, acos, degrees
 
 class Vector():
     """create vectors - initialize instances by entering a list as coordinates (2Dimensional)"""
@@ -58,8 +58,14 @@ class Vector():
         dot_prod = sum(dot_prod)
         return dot_prod
 
+    def get_angle(self, vector2):
+        angle = acos(self.get_dot_prod(vector2) / (self.get_magnitude()*vector2.get_magnitude()))
+        return degrees(angle)
+
+
+
 # -----------testing---------------
 vector_1 = Vector([1, 2, -1])
 vector_2 = Vector([3, 1, 0])
 
-print(vector_1.get_dot_prod(vector_2))
+print(vector_1.get_angle(vector_2))
