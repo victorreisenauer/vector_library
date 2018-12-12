@@ -55,9 +55,7 @@ class Vector():
 
     def get_dot_prod(self, vector2):
         """get the dot product(inner product) instance and vector2"""
-        dot_prod = [x*y for x, y in zip(self.coordinates, vector2.coordinates)]
-        dot_prod = sum(dot_prod)
-        return dot_prod
+        return sum([x*y for x, y in zip(self.coordinates, vector2.coordinates)])
 
     def get_angle(self, vector2):
         """get the angle in degrees between the instance and vector2"""
