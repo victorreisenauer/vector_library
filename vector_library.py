@@ -45,6 +45,14 @@ class Vector():
         magnitude = sqrt(sum([x**2 for x in self.coordinates]))
         return magnitude
 
+    def normalize(self):
+        "get the normalized vector of the vector you called the method on"
+        try:
+            normal_coord = [x/self.get_magnitude() for x in self.coordinates]
+            return Vector(normal_coord)
+        except ZeroDivisionError:
+            raise Exception("Cannot normalize vectors with zero magnitude")
+
 
 # -----------testing---------------
 vector_1 = Vector([0, 0])
