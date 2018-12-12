@@ -35,6 +35,11 @@ class Vector():
         new_coordinates = [x-y for x, y in zip(self.coordinates, vector2.coordinates)]
         return new_coordinates
 
+    def times_scalar(self, scalar):
+        """multiply the vector your called the method on with the inputted scalar"""
+        new_coordinates = [x*scalar for x in self.coordinates]
+        return new_coordinates
+
 
 
 # -----------testing---------------
