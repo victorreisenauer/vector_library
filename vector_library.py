@@ -10,7 +10,7 @@ getcontext().rounding = 'ROUND_HALF_UP'
 
 
 class Vector():
-    """create vectors - initialize instances by entering a list as coordinates"""
+    """create vectors - initialize instances by entering a list of coordinates"""
     def __init__(self, coordinates):
         try:
             if not coordinates:
@@ -122,11 +122,32 @@ class Vector():
             else:
                 raise zero_vector_proj_error
 
+    def get_cross_prod(self, vector2):
+        """get"""
+        if self.dimension == 3 and vector2.dimension == 3:
+            try:
+                x_1, y_1, z_1 = self.coordinates
+                x_2, y_2, z_2 = vector2.coordinates
+                new_coordinates = [y_1*z_2 - y_2*z_1, \
+                                   -(x_1*z_2 - x_2*z_1), \
+                                   x_1*y_2 - x_2*y_1]
+                return Vector(new_coordinates)
 
+            except Exception as vector:
+                pass
+        else:
+            raise Exception('Vectors need to be 3 Dimensional')
+
+    def area_of_parallelogram_with(self, vector2):
+        cross_product = self.get_cross_prod(vector2)
+        return cross_product.get_magnitude()
+
+    def area_of_triangle_with(self, vector2):
+        return self.area_of_parallelogram_with(vector2) / Decimal('2.0')
 
 # -----------testing---------------
-vector_1 = Vector(['3.039', '1.879'])
-vector_2 = Vector(['0.825', '2.036'])
+vector_1 = Vector(['3.039', '1.879', '2'])
+vector_2 = Vector(['0.825', '2.036', '3'])
 
-print(vector_1.projected_onto(vector_2))
-print(getcontext())
+print(vector_1.area_of_parallelogram_with(vector_2))
+
