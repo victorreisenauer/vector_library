@@ -29,6 +29,7 @@ class Vector():
         return self.coordinates == v.coordinates
 
     def is_zero(self, tolerance=1e-10):
+        """helper function to check if a vector has a magnitude of 0 (zero vector)"""
         return self.get_magnitude() < tolerance
 
     def add_vector(self, vector2):
@@ -86,8 +87,8 @@ class Vector():
     def is_parallel_to(self, vector2):
         """check if instance is parallel to vector2"""
         return (self.is_zero()
-                or vector2.is_zero()
-                or self.get_angle(vector2) == 0
+                or vector2.is_zero() \
+                or self.get_angle(vector2) == 0 \
                 or self.get_angle(vector2) == pi)
 
 
