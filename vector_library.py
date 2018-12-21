@@ -3,10 +3,14 @@
 from math import sqrt, acos, degrees, pi
 from decimal import Decimal, getcontext
 
-getcontext().prec = 30
+getcontext().prec = 4
+
+
+getcontext().rounding = 'ROUND_HALF_UP'
+
 
 class Vector():
-    """create vectors - initialize instances by entering a list as coordinates (2Dimensional)"""
+    """create vectors - initialize instances by entering a list as coordinates"""
     def __init__(self, coordinates):
         try:
             if not coordinates:
@@ -92,9 +96,37 @@ class Vector():
                 or self.get_angle(vector2) == pi)
 
 
+    def component_orthogonal_to(self, basis):
+        """return the vector that is orthogonal to the basis vector in a projection"""
+        try:
+            projection = self.projected_onto(basis)
+            return self.sub_vector(projection)
+
+        except Exception as zero_vector_proj_error:
+            if str(zero_vector_proj_error) == 'Basis vector is a zero vector and can\'t be normalized':
+                raise Exception('Basis vector is a zero vector, there is no orthogonal vector')
+            else:
+                raise zero_vector_proj_error
+
+
+    def projected_onto(self, basis):
+        """return the vector projection of the instance onto a basis vector"""
+        try:
+            u = basis.normalize()
+            weight = self.get_dot_prod(u)
+            return u.times_scalar(weight)
+
+        except Exception as zero_vector_proj_error:
+            if str(zero_vector_proj_error) == 'Cannot normalize vectors with zero magnitude':
+                raise Exception('Basis vector is a zero vector and can\'t be normalized')
+            else:
+                raise zero_vector_proj_error
+
+
 
 # -----------testing---------------
-vector_1 = Vector(['1', '0'])
-vector_2 = Vector(['0', '5'])
+vector_1 = Vector(['3.039', '1.879'])
+vector_2 = Vector(['0.825', '2.036'])
 
-#print(vector_2.is_parallel_to(vector_1))
+print(vector_1.projected_onto(vector_2))
+print(getcontext())
